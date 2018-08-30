@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <swiper :options="swiperOption" ref="mySwiper" >
+    <swiper :options="swiperOption" ref="mySwiper" v-if="shoeSwiper">
       <!-- slides -->
-      <swiper-slide v-for="item of swiperList" :key="item.id">
-        <img class="swiper-img" :src="item.url" >
+      <swiper-slide v-for="item of list" :key="item.id">
+        <img class="swiper-img" :src="item.imgUrl" >
       </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-pagination"  slot="pagination"></div>
@@ -17,20 +17,21 @@
 <script>
 export default {
    name: 'HomeSwiper',
+   props:{
+     list:Array,
+   },
    data () {
        return {
         swiperOption: {
           pagination:'.swiper-pagination',
           loop:true
-        },
-        swiperList: [{
-            id: "001",
-            url: 'https://source.qunarzz.com/site/images/wap/home/recommend/iphoneplus/dujia_shuqi_banner_20180710.jpg'
-        },{
-            id: "002",
-            url: 'https://source.qunarzz.com/site/images/wap/home/recommend/iphoneplus/anquan_20180716.png'
-        }]
+        }
       }
+   },
+   computed:{
+     shoeSwiper:function(){
+       return this.list.length
+     }
    } 
 }
 </script>
@@ -42,7 +43,7 @@ export default {
     overflow:hidden
     width:100%
     height:0
-    padding-bottom:25%
+    padding-bottom:31.25%
     background:#eee
     .swiper-img
       width:100%
