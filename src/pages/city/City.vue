@@ -1,7 +1,7 @@
 <template>
     <div>
         <city-header></city-header>
-        <city-search></city-search>
+        <city-search :cities="cities"></city-search>
         <city-list :letter="letter" :cities="cities" :hot="hotCities"></city-list>
         <city-alphabet :cities="cities" @change="handleLetterChange"></city-alphabet>   
     </div>
@@ -42,7 +42,6 @@ export default {
             }
         },
         handleLetterChange:function(letter){//监听子组件传过来的信息
-            console.log(letter)
             this.letter=letter
         }
     },

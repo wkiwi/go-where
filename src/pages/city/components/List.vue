@@ -42,7 +42,6 @@ export default {
     watch:{
         letter() {
             if(this.letter){
-                console.log(123)
                 const element=this.$refs[this.letter][0]
                 this.scroll.scrollToElement(element)
             }
