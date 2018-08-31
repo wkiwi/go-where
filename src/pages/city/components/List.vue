@@ -4,15 +4,15 @@
             <div class="area">
                 <div class="title borde-topbottom">当前城市</div>
                 <div class="button-list">
-                    <div class="button-wrapper">
-                        <div class="button">北京</div>
+                    <div class="button-wrapper" @click="routerIndex()">
+                        <div class="button">{{this.currentCity}}</div>
                     </div>
                 </div>
             </div>
             <div class="area">
                 <div class="title borde-topbottom">热门城市</div>
                 <div class="button-list">
-                    <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                    <div class="button-wrapper" v-for="item of hot" :key="item.id" @click="handleCityClick(item.name)">
                         <div class="button">{{item.name}}</div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
             <div class="area" v-for="(item,key) of cities" :key="key" :ref="key">
                 <div class="title borde-topbottom">{{key}}</div>
                 <div class="item-list">
-                    <div class="item border-bottom" v-for="it of item" :key="it.id">{{it.name}}</div>
+                    <div class="item border-bottom" v-for="it of item" :key="it.id" @click="handleCityClick(it.name)">{{it.name}}</div>
                 </div>
             </div>
         </div>
@@ -29,12 +29,30 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import { mapState , mapMutations} from 'vuex'
 export default {
     name: 'CityList',
     props:{
         hot:Array,
         cities:Object,
         letter:String
+    },
+    computed: {
+        ...mapState({
+        currentCity: 'city'
+        })
+    },
+    methods:{
+        handleCityClick:function(city){
+            //this.$store.dispatch('changeCity',city)
+            //this.$store.commit('changeCity',city)
+            this.changeCity(city)
+            this.$router.push('/')
+        },
+        ...mapMutations(['changeCity']),
+        routerIndex:function(){
+            this.$router.push('/')
+        }
     },
     mounted () {
         this.scroll=new Bscroll(this.$refs.wrapper)
