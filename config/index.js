@@ -9,13 +9,12 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/where_to_go',
     proxyTable: {
-      '/api':{
-        target:'http://localhost:8080',
-        pathRewrite:{
-          '^/api':'/static/mock'
-        }
+      '/api': {  //代理地址
+        target: 'http://index.kiwifruits.cn/',  //需要代理的地址
+        changeOrigin: true,  //是否跨域
+        secure: false, 
       }
     },
 
@@ -57,7 +56,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/where_to_go',
 
     /**
      * Source Maps
